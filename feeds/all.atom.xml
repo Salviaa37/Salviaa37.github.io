@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>salvia37heim</title><link href="heim.salviaa37.com/" rel="alternate"></link><link href="heim.salviaa37.com/feeds/all.atom.xml" rel="self"></link><id>heim.salviaa37.com/</id><updated>2025-03-04T00:00:00+08:00</updated><entry><title>Salvia37`s home</title><link href="heim.salviaa37.com/salvia37s-home.html" rel="alternate"></link><published>2025-03-04T00:00:00+08:00</published><updated>2025-03-04T00:00:00+08:00</updated><author><name>salvia37</name></author><id>tag:None,2025-03-04:heim.salviaa37.com/salvia37s-home.html</id><content type="html">&lt;p&gt;欢迎来到我的网站。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>WSL的备份和迁移</title><link href="heim.salviaa37.com/wslde-bei-fen-he-qian-yi.html" rel="alternate"></link><published>2025-03-04T00:00:00+08:00</published><updated>2025-03-04T00:00:00+08:00</updated><author><name>salvia37</name></author><id>tag:None,2025-03-04:heim.salviaa37.com/wslde-bei-fen-he-qian-yi.html</id><summary type="html">&lt;h2&gt;解决的问题&lt;/h2&gt;
+&lt;p&gt;1.需要把WSL迁移到其他电脑上工作。 
+2.默认情况下WSL安装位置在系统盘，系统盘容量不足。 
+3.像使用虚拟机软件一样备份你正在使用的WSL系统。&lt;/p&gt;
+&lt;h2&gt;步骤&lt;/h2&gt;
+&lt;p&gt;下面的命 …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;解决的问题&lt;/h2&gt;
+&lt;p&gt;1.需要把WSL迁移到其他电脑上工作。 
+2.默认情况下WSL安装位置在系统盘，系统盘容量不足。 
+3.像使用虚拟机软件一样备份你正在使用的WSL系统。&lt;/p&gt;
+&lt;h2&gt;步骤&lt;/h2&gt;
+&lt;p&gt;下面的命令都在Powershell里面执行。 开始之前你需要先记下&lt;strong&gt;需要迁移的WSL系统的用户名&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3&gt;查看需要迁移的WSL是否在运行&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wsl -l -v
+&lt;span class="gh"&gt;#&lt;/span&gt;   NAME      STATE           VERSION
+&lt;span class="gh"&gt;#&lt;/span&gt; * Debian    Running         2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;终止WSL运行&lt;/h3&gt;
+&lt;p&gt;两条命令都可以，任选其一。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wsl --shutdown 
+# 立即终止所有正在运行的分发和 WSL 2 轻型虚拟机。
+
+wsl -t &amp;lt;DistributionName&amp;gt;
+# 终止指定分发。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;导出&lt;/h3&gt;
+&lt;p&gt;将WSL系统导出到指定目录，得到一个tar格式的归档。
+注意：指定目录，也就是&lt;FileName&gt;字段，需要给出导出的归档文件名称，只给出目录位置会报错。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;wsl&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Distro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;FileName&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Options&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;将指定的&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;导入为新分发&lt;/span&gt;&lt;span class="err"&gt;。&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;对于标准输入&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="n"&gt;文件名可以是&lt;/span&gt;&lt;span class="err"&gt;“&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;”。&lt;/span&gt;
+
+&lt;span class="n"&gt;#example&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--export Debian D:\export_Debian.tar&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;注销原系统&lt;/h3&gt;
+&lt;p&gt;根据你的需要自行选择是否注销原来的WSL。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;unregister&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Distro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;注销分发并删除根文件系统。&lt;/span&gt;
+
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;example&lt;/span&gt;
+&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;unregister&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Debian&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;导入&lt;/h3&gt;
+&lt;p&gt;将导出的WSL系统导入到指定位置，需要等待一段时间。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Distro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;InstallLocation&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;FileName&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Options&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="c1"&gt;# 将指定的 tar 导入为新分发。&lt;/span&gt;
+&lt;span class="c1"&gt;# 对于标准输入，文件名可以是“-”。&lt;/span&gt;
+
+&lt;span class="c1"&gt;#example&lt;/span&gt;
+&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;Debian_2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;\&lt;/span&gt;&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Debian&lt;/span&gt;&lt;span class="w"&gt;\ &lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;\&lt;/span&gt;&lt;span class="n"&gt;export_Debian&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在安装目录看到了一个vhdx文件，导入成功。 
+&lt;img alt="image.jpg" src="https://cdn.nlark.com/yuque/0/2024/jpeg/27527519/1724067201109-d2e3839d-48e9-4392-b975-3b5f7a5f3dbc.jpeg#clientId=ufefb1a36-1659-4&amp;amp;from=paste&amp;amp;height=236&amp;amp;id=u69f4b817&amp;amp;originHeight=236&amp;amp;originWidth=777&amp;amp;originalType=url&amp;amp;ratio=1&amp;amp;rotation=0&amp;amp;showTitle=false&amp;amp;size=17812&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u72f21c67-e075-4861-b154-ca1bbd1ad21&amp;amp;title=&amp;amp;width=777"&gt;&lt;/p&gt;
+&lt;h3&gt;设置登录用户&lt;/h3&gt;
+&lt;p&gt;新还原的WSL系统的默认用户会变成root，不能使用原来安装的软件，必须修改默认用户。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Debian.exe config --default-user &amp;lt;username&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;把Debian.exe 替换为你使用WSL分发版执行文件名称，如ubuntu2204.exe等等。 username是原来WSL系统的用户名。 重新启动新的WSL系统，你就可以继续使用了。&lt;/p&gt;
+&lt;h2&gt;其他&lt;/h2&gt;
+&lt;h3&gt;设置默认发行版&lt;/h3&gt;
+&lt;p&gt;要设置与 wsl 命令一起使用的默认 Linux 发行版，请输入 &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wsl -s &amp;lt;Distro&amp;gt;
+# 将 &amp;lt;Distro&amp;gt; 替换为要使用的分发名称。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;例如，从 PowerShell/CMD 输入 &lt;code&gt;wsl -s&lt;/code&gt; Debian，将默认发行版设置为 Debian。 现在从 Powershell 运行 &lt;code&gt;wsl npm init&lt;/code&gt; 将在 Debian 中运行 npm init 命令。 要在 PowerShell 或 Windows 命令提示符下运行特定的 WSL 发行版而不更改默认发行版，请使用命令 &lt;code&gt;wsl -d&lt;/code&gt; ，将 替换为要使用的发行版的名称。&lt;/p&gt;
+&lt;h3&gt;删除导出的归档文件&lt;/h3&gt;
+&lt;h3&gt;Ref&lt;/h3&gt;
+&lt;h2&gt;解决的问题&lt;/h2&gt;
+&lt;p&gt;1.需要把WSL迁移到其他电脑上工作。 
+2.默认情况下WSL安装位置在系统盘，系统盘容量不足。 
+3.像使用虚拟机软件一样备份你正在使用的WSL系统。&lt;/p&gt;
+&lt;h2&gt;步骤&lt;/h2&gt;
+&lt;p&gt;下面的命令都在Powershell里面执行。 开始之前你需要先记下&lt;strong&gt;需要迁移的WSL系统的用户名&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3&gt;查看需要迁移的WSL是否在运行&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wsl -l -v
+&lt;span class="gh"&gt;#&lt;/span&gt;   NAME      STATE           VERSION
+&lt;span class="gh"&gt;#&lt;/span&gt; * Debian    Running         2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;终止WSL运行&lt;/h3&gt;
+&lt;p&gt;两条命令都可以，任选其一。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wsl --shutdown 
+# 立即终止所有正在运行的分发和 WSL 2 轻型虚拟机。
+
+wsl -t &amp;lt;DistributionName&amp;gt;
+# 终止指定分发。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;导出&lt;/h3&gt;
+&lt;p&gt;将WSL系统导出到指定目录，得到一个tar格式的归档。
+注意：指定目录，也就是&lt;FileName&gt;字段，需要给出导出的归档文件名称，只给出目录位置会报错。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Distro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;FileName&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Options&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;将指定的&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;导入为新分发&lt;/span&gt;&lt;span class="err"&gt;。&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;对于标准输入&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="n"&gt;文件名可以是&lt;/span&gt;&lt;span class="err"&gt;“&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;”。&lt;/span&gt;
+
+&lt;span class="n"&gt;#example&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--export Debian D:\export_Debian.tar&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;注销原系统&lt;/h3&gt;
+&lt;p&gt;根据你的需要自行选择是否注销原来的WSL。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;unregister&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Distro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;注销分发并删除根文件系统。&lt;/span&gt;
+
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;example&lt;/span&gt;
+&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;unregister&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Debian&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;导入&lt;/h3&gt;
+&lt;p&gt;将导出的WSL系统导入到指定位置，需要等待一段时间。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Distro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;InstallLocation&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;FileName&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Options&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="c1"&gt;# 将指定的 tar 导入为新分发。&lt;/span&gt;
+&lt;span class="c1"&gt;# 对于标准输入，文件名可以是“-”。&lt;/span&gt;
+
+&lt;span class="c1"&gt;#example&lt;/span&gt;
+&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;Debian_2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;\&lt;/span&gt;&lt;span class="n"&gt;wsl&lt;/span&gt;&lt;span class="w"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Debian&lt;/span&gt;&lt;span class="w"&gt;\ &lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;\&lt;/span&gt;&lt;span class="n"&gt;export_Debian&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在安装目录看到了一个vhdx文件，导入成功。 
+&lt;img alt="image.jpg" src="https://cdn.nlark.com/yuque/0/2024/jpeg/27527519/1724067293526-27bfeea3-ba0b-4804-8ad5-c7064fb43d88.jpeg#clientId=ufefb1a36-1659-4&amp;amp;from=paste&amp;amp;height=236&amp;amp;id=u4982a36a&amp;amp;originHeight=236&amp;amp;originWidth=777&amp;amp;originalType=url&amp;amp;ratio=1&amp;amp;rotation=0&amp;amp;showTitle=false&amp;amp;size=17812&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=uf3dafa13-cd99-4e89-8840-e0f7364d6c5&amp;amp;title=&amp;amp;width=777"&gt;&lt;/p&gt;
+&lt;h3&gt;设置登录用户&lt;/h3&gt;
+&lt;p&gt;新还原的WSL系统的默认用户会变成root，不能使用原来安装的软件，必须修改默认用户。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Debian.exe config --default-user &amp;lt;username&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;把Debian.exe 替换为你使用WSL分发版执行文件名称，如ubuntu2204.exe等等。 username是原来WSL系统的用户名。 重新启动新的WSL系统，你就可以继续使用了。&lt;/p&gt;
+&lt;h2&gt;其他&lt;/h2&gt;
+&lt;h3&gt;设置默认发行版&lt;/h3&gt;
+&lt;p&gt;要设置与 wsl 命令一起使用的默认 Linux 发行版，请输入 &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wsl -s &amp;lt;Distro&amp;gt;
+# 将 &amp;lt;Distro&amp;gt; 替换为要使用的分发名称。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;例如，从 PowerShell/CMD 输入 &lt;code&gt;wsl -s&lt;/code&gt; Debian，将默认发行版设置为 Debian。 现在从 Powershell 运行 &lt;code&gt;wsl npm init&lt;/code&gt; 将在 Debian 中运行 npm init 命令。 要在 PowerShell 或 Windows 命令提示符下运行特定的 WSL 发行版而不更改默认发行版，请使用命令 &lt;code&gt;wsl -d&lt;/code&gt; ，将 替换为要使用的发行版的名称。&lt;/p&gt;
+&lt;h3&gt;删除导出的归档文件&lt;/h3&gt;
+&lt;h3&gt;Ref&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自: &lt;a href="https://zhuanlan.zhihu.com/p/622706723"&gt;WSL的备份和迁移 - 知乎&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content><category term="tips"></category></entry></feed>
