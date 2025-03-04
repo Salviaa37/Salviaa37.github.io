@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>WSL的备份和迁移</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="解决的问题 1.需要把WSL迁移到其他电脑上工作。 2.默认情况下WSL安装位置在系统盘，系统盘容量不足。 3.像使用虚拟机软件一样备份你正在使用的WSL系统。 步骤 下面的命 …" />
+        </head>
+
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">salviaa37heim</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/misc.html">misc</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/wslde-bei-fen-he-qian-yi.html" rel="bookmark"
+             title="Permalink to WSL的备份和迁移">WSL的备份和迁移</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-03-04T00:00:00+08:00">
+                Published: 周二 04 三月 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/salviaa37.html">salviaa37</a>
+                </address>
+        <p>In <a href="/category/misc.html">misc</a>.</p>
+        
+</footer><!-- /.post-info -->        <h2>解决的问题</h2>
+<p>1.需要把WSL迁移到其他电脑上工作。 
+2.默认情况下WSL安装位置在系统盘，系统盘容量不足。 
+3.像使用虚拟机软件一样备份你正在使用的WSL系统。</p>
+<h2>步骤</h2>
+<p>下面的命令都在Powershell里面执行。 开始之前你需要先记下<strong>需要迁移的WSL系统的用户名</strong>。</p>
+<h3>查看需要迁移的WSL是否在运行</h3>
+<div class="highlight"><pre><span></span><code>wsl -l -v
+<span class="gh">#</span>   NAME      STATE           VERSION
+<span class="gh">#</span> * Debian    Running         2
+</code></pre></div>
+
+<h3>终止WSL运行</h3>
+<p>两条命令都可以，任选其一。</p>
+<div class="highlight"><pre><span></span><code>wsl --shutdown 
+# 立即终止所有正在运行的分发和 WSL 2 轻型虚拟机。
+
+wsl -t &lt;DistributionName&gt;
+# 终止指定分发。
+</code></pre></div>
+
+<h3>导出</h3>
+<p>将WSL系统导出到指定目录，得到一个tar格式的归档。
+注意：指定目录，也就是<FileName>字段，需要给出导出的归档文件名称，只给出目录位置会报错。</p>
+<div class="highlight"><pre><span></span><code><span class="n">wsl</span> 
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="n">export</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Distro</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">FileName</span><span class="o">&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">Options</span><span class="o">]</span>
+<span class="err">#</span><span class="w"> </span><span class="n">将指定的</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="n">导入为新分发</span><span class="err">。</span>
+<span class="err">#</span><span class="w"> </span><span class="n">对于标准输入</span><span class="err">，</span><span class="n">文件名可以是</span><span class="err">“</span><span class="o">-</span><span class="err">”。</span>
+
+<span class="n">#example</span><span class="w"> </span>
+<span class="n">wsl</span><span class="w"> </span><span class="c1">--export Debian D:\export_Debian.tar</span>
+</code></pre></div>
+
+<h3>注销原系统</h3>
+<p>根据你的需要自行选择是否注销原来的WSL。</p>
+<div class="highlight"><pre><span></span><code><span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="n">unregister</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Distro</span><span class="o">&gt;</span>
+<span class="p">#</span><span class="w"> </span><span class="err">注销分发并删除根文件系统。</span>
+
+<span class="p">#</span><span class="n">example</span>
+<span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="n">unregister</span><span class="w"> </span><span class="n">Debian</span>
+</code></pre></div>
+
+<h3>导入</h3>
+<p>将导出的WSL系统导入到指定位置，需要等待一段时间。</p>
+<div class="highlight"><pre><span></span><code><span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="kn">import</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Distro</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">InstallLocation</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">FileName</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Options</span><span class="p">]</span>
+<span class="c1"># 将指定的 tar 导入为新分发。</span>
+<span class="c1"># 对于标准输入，文件名可以是“-”。</span>
+
+<span class="c1">#example</span>
+<span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="kn">import</span><span class="w"> </span><span class="nn">Debian_2</span><span class="w"> </span><span class="n">D</span><span class="p">:</span><span class="w">\</span><span class="n">wsl</span><span class="w">\</span><span class="n">Debian</span><span class="w">\ </span><span class="n">D</span><span class="p">:</span><span class="w">\</span><span class="n">export_Debian</span><span class="o">.</span><span class="n">tar</span>
+</code></pre></div>
+
+<p>在安装目录看到了一个vhdx文件，导入成功。 
+<img alt="image.jpg" src="https://cdn.nlark.com/yuque/0/2024/jpeg/27527519/1724067201109-d2e3839d-48e9-4392-b975-3b5f7a5f3dbc.jpeg#clientId=ufefb1a36-1659-4&amp;from=paste&amp;height=236&amp;id=u69f4b817&amp;originHeight=236&amp;originWidth=777&amp;originalType=url&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=17812&amp;status=done&amp;style=none&amp;taskId=u72f21c67-e075-4861-b154-ca1bbd1ad21&amp;title=&amp;width=777"></p>
+<h3>设置登录用户</h3>
+<p>新还原的WSL系统的默认用户会变成root，不能使用原来安装的软件，必须修改默认用户。</p>
+<div class="highlight"><pre><span></span><code>Debian.exe config --default-user &lt;username&gt;
+</code></pre></div>
+
+<p>把Debian.exe 替换为你使用WSL分发版执行文件名称，如ubuntu2204.exe等等。 username是原来WSL系统的用户名。 重新启动新的WSL系统，你就可以继续使用了。</p>
+<h2>其他</h2>
+<h3>设置默认发行版</h3>
+<p>要设置与 wsl 命令一起使用的默认 Linux 发行版，请输入 </p>
+<div class="highlight"><pre><span></span><code>wsl -s &lt;Distro&gt;
+# 将 &lt;Distro&gt; 替换为要使用的分发名称。
+</code></pre></div>
+
+<p>例如，从 PowerShell/CMD 输入 <code>wsl -s</code> Debian，将默认发行版设置为 Debian。 现在从 Powershell 运行 <code>wsl npm init</code> 将在 Debian 中运行 npm init 命令。 要在 PowerShell 或 Windows 命令提示符下运行特定的 WSL 发行版而不更改默认发行版，请使用命令 <code>wsl -d</code> ，将 替换为要使用的发行版的名称。</p>
+<h3>删除导出的归档文件</h3>
+<h3>Ref</h3>
+<h2>解决的问题</h2>
+<p>1.需要把WSL迁移到其他电脑上工作。 
+2.默认情况下WSL安装位置在系统盘，系统盘容量不足。 
+3.像使用虚拟机软件一样备份你正在使用的WSL系统。</p>
+<h2>步骤</h2>
+<p>下面的命令都在Powershell里面执行。 开始之前你需要先记下<strong>需要迁移的WSL系统的用户名</strong>。</p>
+<h3>查看需要迁移的WSL是否在运行</h3>
+<div class="highlight"><pre><span></span><code>wsl -l -v
+<span class="gh">#</span>   NAME      STATE           VERSION
+<span class="gh">#</span> * Debian    Running         2
+</code></pre></div>
+
+<h3>终止WSL运行</h3>
+<p>两条命令都可以，任选其一。</p>
+<div class="highlight"><pre><span></span><code>wsl --shutdown 
+# 立即终止所有正在运行的分发和 WSL 2 轻型虚拟机。
+
+wsl -t &lt;DistributionName&gt;
+# 终止指定分发。
+</code></pre></div>
+
+<h3>导出</h3>
+<p>将WSL系统导出到指定目录，得到一个tar格式的归档。
+注意：指定目录，也就是<FileName>字段，需要给出导出的归档文件名称，只给出目录位置会报错。</p>
+<div class="highlight"><pre><span></span><code><span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="n">export</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Distro</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">FileName</span><span class="o">&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">Options</span><span class="o">]</span>
+<span class="err">#</span><span class="w"> </span><span class="n">将指定的</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="n">导入为新分发</span><span class="err">。</span>
+<span class="err">#</span><span class="w"> </span><span class="n">对于标准输入</span><span class="err">，</span><span class="n">文件名可以是</span><span class="err">“</span><span class="o">-</span><span class="err">”。</span>
+
+<span class="n">#example</span><span class="w"> </span>
+<span class="n">wsl</span><span class="w"> </span><span class="c1">--export Debian D:\export_Debian.tar</span>
+</code></pre></div>
+
+<h3>注销原系统</h3>
+<p>根据你的需要自行选择是否注销原来的WSL。</p>
+<div class="highlight"><pre><span></span><code><span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="n">unregister</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Distro</span><span class="o">&gt;</span>
+<span class="p">#</span><span class="w"> </span><span class="err">注销分发并删除根文件系统。</span>
+
+<span class="p">#</span><span class="n">example</span>
+<span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="n">unregister</span><span class="w"> </span><span class="n">Debian</span>
+</code></pre></div>
+
+<h3>导入</h3>
+<p>将导出的WSL系统导入到指定位置，需要等待一段时间。</p>
+<div class="highlight"><pre><span></span><code><span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="kn">import</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Distro</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">InstallLocation</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">FileName</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Options</span><span class="p">]</span>
+<span class="c1"># 将指定的 tar 导入为新分发。</span>
+<span class="c1"># 对于标准输入，文件名可以是“-”。</span>
+
+<span class="c1">#example</span>
+<span class="n">wsl</span><span class="w"> </span><span class="o">--</span><span class="kn">import</span><span class="w"> </span><span class="nn">Debian_2</span><span class="w"> </span><span class="n">D</span><span class="p">:</span><span class="w">\</span><span class="n">wsl</span><span class="w">\</span><span class="n">Debian</span><span class="w">\ </span><span class="n">D</span><span class="p">:</span><span class="w">\</span><span class="n">export_Debian</span><span class="o">.</span><span class="n">tar</span>
+</code></pre></div>
+
+<p>在安装目录看到了一个vhdx文件，导入成功。 
+<img alt="image.jpg" src="https://cdn.nlark.com/yuque/0/2024/jpeg/27527519/1724067293526-27bfeea3-ba0b-4804-8ad5-c7064fb43d88.jpeg#clientId=ufefb1a36-1659-4&amp;from=paste&amp;height=236&amp;id=u4982a36a&amp;originHeight=236&amp;originWidth=777&amp;originalType=url&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=17812&amp;status=done&amp;style=none&amp;taskId=uf3dafa13-cd99-4e89-8840-e0f7364d6c5&amp;title=&amp;width=777"></p>
+<h3>设置登录用户</h3>
+<p>新还原的WSL系统的默认用户会变成root，不能使用原来安装的软件，必须修改默认用户。</p>
+<div class="highlight"><pre><span></span><code>Debian.exe config --default-user &lt;username&gt;
+</code></pre></div>
+
+<p>把Debian.exe 替换为你使用WSL分发版执行文件名称，如ubuntu2204.exe等等。 username是原来WSL系统的用户名。 重新启动新的WSL系统，你就可以继续使用了。</p>
+<h2>其他</h2>
+<h3>设置默认发行版</h3>
+<p>要设置与 wsl 命令一起使用的默认 Linux 发行版，请输入 </p>
+<div class="highlight"><pre><span></span><code>wsl -s &lt;Distro&gt;
+# 将 &lt;Distro&gt; 替换为要使用的分发名称。
+</code></pre></div>
+
+<p>例如，从 PowerShell/CMD 输入 <code>wsl -s</code> Debian，将默认发行版设置为 Debian。 现在从 Powershell 运行 <code>wsl npm init</code> 将在 Debian 中运行 npm init 命令。 要在 PowerShell 或 Windows 命令提示符下运行特定的 WSL 发行版而不更改默认发行版，请使用命令 <code>wsl -d</code> ，将 替换为要使用的发行版的名称。</p>
+<h3>删除导出的归档文件</h3>
+<h3>Ref</h3>
+<blockquote>
+<p>来自: <a href="https://zhuanlan.zhihu.com/p/622706723">WSL的备份和迁移 - 知乎</a></p>
+</blockquote>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                                        <li><a href="https://www.python.org/">Python.org</a></li>
+                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                                                        <li><a href="#">You can modify those links in your config file</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
+
+                                                        <li><a href="#">You can add links in your config file</a></li>
+                                                        <li><a href="#">Another social link</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+        </body>
+</html>
