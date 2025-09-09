@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{# 自定义首页：封面 Hero + 分类入口（基于 category 对象） #}
+{% block title %}{{ SITENAME }}{% if SITESUBTITLE %} | {{ SITESUBTITLE }}{% endif %}{% endblock %}
+
+{% block page_header %}{% endblock %}
+
+{% block content %}
+<div class="home-hero {% if HERO_IMAGE %}has-bg{% endif %}">
+  {% if HERO_IMAGE %}
+    <div class="hero-bg" style="background-image:url('{{ SITEURL }}/{{ HERO_IMAGE }}');"></div>
+  {% endif %}
+  <div class="hero-inner">
+    <h1 class="site-title">{{ SITENAME }}</h1>
+    {% if SITESUBTITLE %}<p class="site-subtitle">{{ SITESUBTITLE }}</p>{% endif %}
+    <div class="hero-actions">
+      <a href="#categories" class="btn btn-primary btn-lg scroll-down">进入分类 ↓</a>
+    </div>
+  </div>
+</div>
+
+<div id="categories" class="category-section">
+  <h2 class="section-title">分类导航</h2>
+  <div class="row category-grid">
+    {% for category, articles in categories %}
+      <div class="col-sm-6 col-md-4 mb-4">
+        <a class="cat-card" href="{{ SITEURL }}/{{ category.url }}">
+          <div class="cat-card-body">
+            <h3 class="cat-name">{{ category }}</h3>
+            <p class="cat-meta">{{ articles|length }} 篇文章</p>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<hr>
+<h2 class="section-title">最新文章</h2>
+{% for article in articles_page.object_list %}
+  <article class="row teaser">
+    <header class="col-sm-4 text-muted">
+      <ul>
+        <li title="{{ article.date.isoformat() }}">
+          <i class="fas fa-clock"></i>
+          {{ article.locale_date }}
+        </li>
+        <li>
+          <i class="fas fa-folder-open"></i>
+          <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+        </li>
+        {% if not HIDE_AUTHORS and article.authors %}
+          <li>
+            <i class="fas fa-user"></i>
+            {% for author in article.authors %}
+              <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>{% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </li>
+        {% endif %}
+      </ul>
+    </header>
+    <div class="col-sm-8">
+      <h4 class="title">
+        <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}{% if article.link %} <i class="fas fa-link"></i>{% endif %}</a>
+      </h4>
+      <div class="content">
+        {{ article.summary|striptags }}
+      </div>
+    </div>
+  </article>
+  {% if not loop.last %}<hr>{% endif %}
+{% endfor %}
+{% include 'include/pagination.html' %}
+{% endblock %}

@@ -3,7 +3,7 @@ import shlex
 import shutil
 import sys
 
-from invoke import task
+from invoke.tasks import task
 from invoke.main import program
 from pelican import main as pelican_main
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer

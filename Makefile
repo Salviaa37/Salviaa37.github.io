@@ -69,6 +69,14 @@ publish:
 	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
 
 github: publish
-    cd "$(OUTPUTDIR)" ; git add . ;  git commit -m "update blogs" ; git push origin master
+	cd "$(OUTPUTDIR)" ; \
+	git init -q ; \
+	git remote add origin "$(SITE_REPO)" 2>/dev/null || true ; \
+	git add . ; \
+	git commit -m "update blogs" --allow-empty ; \
+	git branch -M main ; \
+	git push -f origin main
+
+# 可在命令行指定仓库地址： make github SITE_REPO=git@github.com:Salviaa37/Salviaa37.github.io.git
 
 .PHONY: html help clean regenerate serve serve-global devserver devserver-global publish 
