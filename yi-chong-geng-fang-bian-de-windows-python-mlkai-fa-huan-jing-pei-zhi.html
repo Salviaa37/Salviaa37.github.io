@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  一种更方便的Win Py ML开发环境配置 | Salviaa37`s Home
+</title>
+  <link rel="canonical" href="https://salviaa37.github.io/yi-chong-geng-fang-bian-de-windows-python-mlkai-fa-huan-jing-pei-zhi.html">
+
+
+  <link rel="stylesheet" href="https://salviaa37.github.io/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://salviaa37.github.io/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://salviaa37.github.io/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://salviaa37.github.io/theme/css/theme.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://salviaa37.github.io/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://salviaa37.github.io/feeds/review.atom.xml">  
+  <meta name="description" content="OS：Windows Python发行版：Python （Microsoft Store） 虚拟环境管理：uv IDE：Visual Studio Code GPU：Nvidia RTX 40xx 环境配置 安装Python 打开Microsoft Store搜索Python，可以看到Microsoft Store提供了不同版本的Python，选最新的下载。 一般来说，Python版本越新，性 …">
+
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="title"><a href="https://salviaa37.github.io/">Salviaa37`s Home</a></h1>
+      <ul class="list-inline">
+          <li class="list-inline-item"><a href="https://salviaa37.github.io/" target="_blank">Home</a></li>
+          <li class="list-inline-item"><a href="https://github.com/Salviaa37" target="_blank">Github</a></li>
+          <li class="list-inline-item"><a href="https://salviaa37.github.io/category/tips.html" target="_blank">Tips</a></li>
+          <li class="list-inline-item"><a href="https://salviaa37.github.io/category/misc.html" target="_blank">Resume</a></li>
+      </ul>
+  </div>
+</div>    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>  一种更方便的Win Py ML开发环境配置
+</h1>
+      <hr>
+  <article class="article">
+    <header>
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2025-09-09T00:00:00+08:00">
+          <i class="fas fa-clock"></i>
+          周二 09 九月 2025
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://salviaa37.github.io/category/review.html">Review</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://salviaa37.github.io/author/salviaa37.html">salviaa37</a>          </li>
+      </ul>
+    </header>
+    <div class="content">
+      <p>OS：Windows 
+Python发行版：Python （Microsoft Store）
+虚拟环境管理：uv
+IDE：Visual Studio Code 
+GPU：Nvidia RTX 40xx</p>
+<h1>环境配置</h1>
+<h2>安装Python</h2>
+<p>打开Microsoft Store搜索Python，可以看到Microsoft Store提供了不同版本的Python，选最新的下载。
+一般来说，Python版本越新，性能越提升。</p>
+<p>最新为3.13
+3.13
+https://apps.microsoft.com/detail/9PNRBTZXMB4Z?hl=neutral&amp;gl=US&amp;ocid=pdpshare</p>
+<p>3.9
+https://apps.microsoft.com/detail/9P7QFQMJRFP7?hl=neutral&amp;gl=US&amp;ocid=pdpshare</p>
+<h2>检测安装情况</h2>
+<div class="highlight"><pre><span></span><code><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">xxx</span><span class="p">\</span><span class="n">Cpp_Projects</span><span class="p">&gt;</span> <span class="n">pip</span> <span class="n">-V</span>
+<span class="n">pip</span> <span class="n">25</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span> <span class="n">from</span> <span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">xxx</span><span class="p">\</span><span class="n">AppData</span><span class="p">\</span><span class="n">Local</span><span class="p">\</span><span class="n">Packages</span><span class="p">\</span><span class="n">PythonSoftwareFoundation</span><span class="p">.</span><span class="n">Python</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">13_qbz5n2kfra8p0</span><span class="p">\</span><span class="n">LocalCache</span><span class="p">\</span><span class="n">local-packages</span><span class="p">\</span><span class="n">Python313</span><span class="p">\</span><span class="n">site-packages</span><span class="p">\</span><span class="n">pip</span> <span class="p">(</span><span class="n">python</span> <span class="n">3</span><span class="p">.</span><span class="n">13</span><span class="p">)</span>
+</code></pre></div>
+
+<p>如此则安装成功。</p>
+<h2>安装uv</h2>
+<p>使用uv作为虚拟环境管理器。
+<a href="https://uv.doczh.com/">uv 中文文档</a></p>
+<h3><strong>安装</strong></h3>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>uv
+</code></pre></div>
+
+<h3><strong>创建环境</strong></h3>
+<div class="highlight"><pre><span></span><code>uv init
+</code></pre></div>
+
+<h2>更换镜像服务器</h2>
+<p>使用国内（CERNET）的镜像服务器可以提高下载软件包速度。
+参照下面的网页中指导操作。
+<a href="https://help.mirrors.cernet.edu.cn/pypi/">PyPI 软件仓库镜像使用帮助 - MirrorZ Help</a></p>
+<p>pip</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+pip<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>global.index-url<span class="w"> </span>https://mirrors.cernet.edu.cn/pypi/web/simple
+</code></pre></div>
+
+<p>uv
+uv不能直接通过命令行修改配置，需要在 <code>~/.config/uv/uv.toml</code> 或者 <code>/etc/uv/uv.toml</code> 填写下面的内容</p>
+<div class="highlight"><pre><span></span><code><span class="o">[[</span>index<span class="o">]]</span>
+<span class="nv">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://mirrors.cernet.edu.cn/pypi/web/simple&quot;</span>
+<span class="nv">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+</code></pre></div>
+
+<h2>安装Pytorch</h2>
+<p>这里我们安装cuda版本的Pytorch。</p>
+<h3>检查显卡CUDA版本</h3>
+<p>查看显卡驱动的cuda版本</p>
+<div class="highlight"><pre><span></span><code><span class="n">nvidia-smi</span>    
+</code></pre></div>
+
+<p>命令行终端显示出的<code>CUDA version: 12.9</code>即为CUDA版本，安装的Pytorch包应当不高于这个版本。</p>
+<p>Pytorch默认用pip安装，但是其安装索引不固定是Pypi，而是根据平台和加速类型（cpu、gpu）指定不同的安装索引。
+如果直接使用<code>uv add</code>命令安装</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>add<span class="w"> </span>torch<span class="w"> </span>torchvision
+</code></pre></div>
+
+<p>只会默认安装Pypi索引版本的torch，这个版本不支持cuda。</p>
+<h3>集成Pytorch到uv</h3>
+<p>如果需要集成Pytorch索引到uv配置，需要向项目配置文件<code>pyproject.toml</code>（）中写入以下内容。
+这里以 CUDA 12.9版本为例，并参考了官方文档。<a href="https://docs.astral.sh/uv/guides/integration/pytorch/#installing-pytorch">Using uv with PyTorch | uv</a></p>
+<p>添加需要的包到依赖项</p>
+<div class="highlight"><pre><span></span><code><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;uvproject&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=3.13&quot;</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;torch&gt;=2.7.0&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s2">&quot;torchvision&gt;=0.22.0&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>添加你需要的安装版本索引到</p>
+<div class="highlight"><pre><span></span><code><span class="k">[[tool.uv.index]]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;pytorch-cu129&quot;</span>
+<span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://download.pytorch.org/whl/cu129&quot;</span>
+<span class="n">explicit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
+
+<p>指定包来源</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.uv.sources]</span>
+<span class="n">torch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;pytorch-cu129&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;sys_platform == &#39;linux&#39; or sys_platform == &#39;win32&#39;&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">torchvision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;pytorch-cu129&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;sys_platform == &#39;linux&#39; or sys_platform == &#39;win32&#39;&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>通过uv运行pip安装Pytorch
+Pytorch具体命令详见官方网站<a href="https://pytorch.org/get-started/locally/">Pytorch Get Started</a></p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>torchvision<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu129
+</code></pre></div>
+
+<p>等待Pytorch下载安装完成。</p>
+<h2>测试安装情况</h2>
+<p>Pytorch安装完成后，需要测试其是否与CUDA成功连接。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</code></pre></div>
+
+<p>第一行输出为<code>True</code>，第二行输出为<code>2.x.x+cu12x</code>，表明cuda可以连接上Pytorch，至此安装成功。</p>
+<h1>Issue</h1>
+<p>不可以混用uv add和pip install语法。
+比如下面的↓命令。</p>
+<div class="highlight"><pre><span></span><code><span class="nb">PS </span><span class="n">C</span><span class="p">:\&gt;</span> <span class="n">uv</span> <span class="n">add</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="p">-</span><span class="n">-index-url</span> <span class="n">https</span><span class="p">://</span><span class="n">download</span><span class="p">.</span><span class="n">pytorch</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">whl</span><span class="p">/</span><span class="n">cu129</span>        
+</code></pre></div>
+
+<p>会安装失败，可能因为uv没有pip编译wheel的能力。</p>
+<div class="highlight"><pre><span></span><code><span class="n">warning</span><span class="p">:</span> <span class="n">Indexes</span> <span class="n">specified</span> <span class="n">via</span> <span class="p">`-</span><span class="n">-index-url</span><span class="p">`</span> <span class="n">will</span> <span class="n">not</span> <span class="n">be</span> <span class="n">persisted</span> <span class="n">to</span> <span class="n">the</span> <span class="p">`</span><span class="n">pyproject</span><span class="p">.</span><span class="n">toml</span><span class="p">`</span> <span class="n">file</span><span class="p">;</span> <span class="n">use</span> <span class="p">`-</span><span class="n">-default-index</span><span class="p">`</span> <span class="n">instead</span><span class="p">.</span>
+<span class="n">Resolved</span> <span class="n">30</span> <span class="n">packages</span> <span class="k">in</span> <span class="n">3</span><span class="p">.</span><span class="n">12s</span>
+<span class="n">error</span><span class="p">:</span> <span class="n">Distribution</span> <span class="p">`</span><span class="n">markupsafe</span><span class="p">==</span><span class="n">3</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2</span> <span class="p">@</span> <span class="n">registry</span><span class="p">+</span><span class="n">https</span><span class="p">://</span><span class="n">download</span><span class="p">.</span><span class="n">pytorch</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">whl</span><span class="p">/</span><span class="n">cu129</span><span class="p">`</span> <span class="n">can</span><span class="s1">&#39;t be installed because it doesn&#39;</span><span class="n">t</span> <span class="n">have</span> <span class="n">a</span> <span class="n">source</span> <span class="n">distribution</span> <span class="n">or</span> <span class="n">wheel</span> <span class="k">for</span> <span class="n">the</span> <span class="n">current</span> <span class="n">platform</span>
+
+<span class="n">hint</span><span class="p">:</span> <span class="n">You</span><span class="err">&#39;</span><span class="n">re</span> <span class="n">on</span> <span class="n">Windows</span> <span class="p">(`</span><span class="n">win_amd64</span><span class="p">`),</span> <span class="n">but</span> <span class="p">`</span><span class="n">markupsafe</span><span class="p">`</span> <span class="p">(</span><span class="n">v3</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2</span><span class="p">)</span> <span class="n">only</span> <span class="n">has</span> <span class="n">wheels</span> <span class="k">for</span> <span class="n">the</span> <span class="n">following</span> <span class="n">platforms</span><span class="p">:</span> <span class="p">`</span><span class="n">manylinux_2_17_x86_64</span><span class="p">`,</span> <span class="p">`</span><span class="n">manylinux2014_x86_64</span><span class="p">`;</span> <span class="n">consider</span> <span class="n">adding</span> <span class="n">your</span> <span class="n">platform</span> <span class="n">to</span> <span class="p">`</span><span class="n">tool</span><span class="p">.</span><span class="n">uv</span><span class="p">.</span><span class="n">required-environments</span><span class="p">`</span> <span class="n">to</span> <span class="n">ensure</span> <span class="n">uv</span> <span class="n">resolves</span> <span class="n">to</span> <span class="n">a</span> <span class="n">version</span> <span class="n">with</span> <span class="n">compatible</span> <span class="n">wheels</span>
+</code></pre></div>
+
+<p>解决办法是使用uv的pip接口，语法</p>
+<div class="highlight"><pre><span></span><code>uv pip install ....
+</code></pre></div>
+
+<p>如果原来的命令是pip3，也要替换成pip。</p>
+<h1>命令速查</h1>
+<h3>pip</h3>
+<div class="highlight"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="nx">安装</span><span class="o">&amp;</span><span class="nx">更新</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">package_name</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">--</span><span class="nx">upgrade</span><span class="w"> </span><span class="nx">package_name</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">从指定文件安装包</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">-</span><span class="nx">r</span><span class="w"> </span><span class="nx">requirements</span><span class="p">.</span><span class="nx">txt</span>
+
+<span class="err">#</span><span class="w"> </span><span class="nx">卸载</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">uninstall</span><span class="w"> </span><span class="nx">package_name</span>
+
+<span class="err">#</span><span class="w"> </span><span class="nx">列出</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">list</span>
+
+<span class="err">#</span><span class="w"> </span><span class="nx">列出未更新</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="o">--</span><span class="nx">outdated</span>
+
+<span class="err">#</span><span class="w"> </span><span class="nx">搜索</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">search</span><span class="w"> </span><span class="nx">package_name</span>
+
+<span class="err">#</span><span class="w"> </span><span class="nx">清除缓存</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="nx">purge</span>
+
+<span class="err">#</span><span class="w"> </span><span class="nx">更新pip</span>
+<span class="nx">python</span><span class="p">.</span><span class="nx">exe</span><span class="w"> </span><span class="o">-</span><span class="nx">m</span><span class="w"> </span><span class="nx">pip</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">--</span><span class="nx">upgrade</span><span class="w"> </span><span class="nx">pip</span>
+
+<span class="err">#</span><span class="w"> </span><span class="nx">指定软件包服务器</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">-</span><span class="nx">i</span><span class="w"> </span><span class="nx">https</span><span class="p">:</span><span class="c1">//mirrors.cernet.edu.cn/pypi/web/simple some-package</span>
+</code></pre></div>
+
+<h3>uv</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># 创建虚拟环境</span>
+<span class="n">uv</span> <span class="n">init</span>
+
+<span class="c"># 同步配置文件，更新环境</span>
+<span class="n">uv</span> <span class="n">sync</span>
+
+<span class="c"># 向当前虚拟环境添加包</span>
+<span class="n">uv</span> <span class="n">add</span> <span class="n">package_name</span>
+
+<span class="c"># 移除当前虚拟环境的包</span>
+<span class="n">uv</span> <span class="n">remove</span> <span class="n">package_name</span>
+
+<span class="c"># 展示当前环境的包依赖关系树</span>
+<span class="n">uv</span> <span class="n">tree</span>
+</code></pre></div>
+
+<p>文档
+<a href="https://docs.astral.sh/uv/">uv</a>
+<a href="https://uv.doczh.com/">uv 中文文档</a></p>
+<h1>其他</h1>
+<h2>pip修改配置文件</h2>
+<h3>Linux / macOS</h3>
+<p>配置文件的位置在 <code>~/.pip/pip.conf</code>（如不存在，创建该目录和文件）：
+打开配置文件 <code>~/.pip/pip.conf</code>，修改内容如下：</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="n">global</span><span class="o">]</span><span class="k">index</span><span class="o">-</span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="p">.</span><span class="n">tuna</span><span class="p">.</span><span class="n">tsinghua</span><span class="p">.</span><span class="n">edu</span><span class="p">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span><span class="o">[</span><span class="n">install</span><span class="o">]</span><span class="n">trusted</span><span class="o">-</span><span class="k">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="p">.</span><span class="n">tuna</span><span class="p">.</span><span class="n">tsinghua</span><span class="p">.</span><span class="n">edu</span><span class="p">.</span><span class="n">cn</span>
+</code></pre></div>
+
+<h3>Windows</h3>
+<p>在当前用户目录下（<code>C:/Users/xxx/</code>，xxx是你的用户名）创建一个 pip.ini文件，文件中输入上述内容。
+查看镜像地址修改状态</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pip3<span class="w"> </span>config<span class="w"> </span>listglobal.index-url<span class="o">=</span><span class="s1">&#39;https://pypi.tuna.tsinghua.edu.cn/simple&#39;</span>install.trusted-host<span class="o">=</span><span class="s1">&#39;https://pypi.tuna.tsinghua.edu.cn&#39;</span>
+</code></pre></div>
+
+<hr>
+<p>（全文完）</p>
+    </div>
+  </article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://salviaa37.github.io/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://salviaa37.github.io/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://salviaa37.github.io/categories.html">Categories</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
+</html>

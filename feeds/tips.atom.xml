@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>salvia37heim - tips</title><link href="heim.salviaa37.com/" rel="alternate"></link><link href="heim.salviaa37.com/feeds/tips.atom.xml" rel="self"></link><id>heim.salviaa37.com/</id><updated>2025-03-04T00:00:00+08:00</updated><entry><title>WSL的备份和迁移</title><link href="heim.salviaa37.com/wslde-bei-fen-he-qian-yi.html" rel="alternate"></link><published>2025-03-04T00:00:00+08:00</published><updated>2025-03-04T00:00:00+08:00</updated><author><name>salvia37</name></author><id>tag:None,2025-03-04:heim.salviaa37.com/wslde-bei-fen-he-qian-yi.html</id><summary type="html">&lt;h2&gt;解决的问题&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Salviaa37`s Home - tips</title><link href="https://salviaa37.github.io/" rel="alternate"/><link href="https://salviaa37.github.io/feeds/tips.atom.xml" rel="self"/><id>https://salviaa37.github.io/</id><updated>2025-03-04T00:00:00+08:00</updated><entry><title>WSL的备份和迁移</title><link href="https://salviaa37.github.io/wslde-bei-fen-he-qian-yi.html" rel="alternate"/><published>2025-03-04T00:00:00+08:00</published><updated>2025-03-04T00:00:00+08:00</updated><author><name>salviaa37</name></author><id>tag:salviaa37.github.io,2025-03-04:/wslde-bei-fen-he-qian-yi.html</id><summary type="html">&lt;h2&gt;解决的问题&lt;/h2&gt;
 &lt;p&gt;1.需要把WSL迁移到其他电脑上工作。 
 2.默认情况下WSL安装位置在系统盘，系统盘容量不足。 
 3.像使用虚拟机软件一样备份你正在使用的WSL系统。&lt;/p&gt;
@@ -147,4 +147,4 @@ wsl -t &amp;lt;DistributionName&amp;gt;
 &lt;h3&gt;Ref&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;来自: &lt;a href="https://zhuanlan.zhihu.com/p/622706723"&gt;WSL的备份和迁移 - 知乎&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</content><category term="tips"></category></entry></feed>
+&lt;/blockquote&gt;</content><category term="tips"/></entry></feed>
