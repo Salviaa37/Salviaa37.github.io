@@ -1,3 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual envs
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pelican build output
+output/
+
+# Logs
+*.log
 # Python-generated files
 __pycache__/
 *.py[oc]
