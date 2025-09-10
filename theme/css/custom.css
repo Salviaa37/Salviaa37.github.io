@@ -1,0 +1,144 @@
+/* 如果需要重定义 bootstrap 变量，可添加 :root { --primary: ... } */
+
+/* Header 自定义背景与字体颜色 */
+.header {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: #f5f7fa;
+  border-bottom: none; /* 去除原本的底部细线，如需保留可删掉 */
+  padding: 2.5rem 0 1rem; /* 稍微增加上内边距 */
+}
+
+/* 站点主标题与副标题颜色 */
+.header .title a,
+.header .title,
+.header p,
+.header ul a {
+  color: #f5f7fa !important;
+  text-decoration: none;
+}
+
+/* 菜单 hover/焦点 */
+.header ul a:hover,
+.header ul a:focus {
+  color: #ffe082 !important; /* 柔和高亮 */
+}
+
+/* 如果使用 SITEIMAGE，给图片加个阴影和顶部间距 */
+.header img {
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  border-radius: .5rem;
+}
+
+/* 让分隔线更柔和（如果后续在 main 区域的 hr 仍需保留） */
+.main > .container > h1 + hr {
+  border-top: 2px solid rgba(255,255,255,.15);
+}
+
+/* 自适配暗色模式（可选） */
+@media (prefers-color-scheme: dark) {
+  .header {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  }
+}
+
+/* 若想要使用图片背景（替换纯色渐变）：
+.header {
+  background: url('/images/cover-wide.jpg') center/cover no-repeat;
+  color: #fff;
+}
+*/
+
+/* ---------------- Home Hero ---------------- */
+.home-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: -2rem -0 -1rem; /* 抵消 header 下方默认间距（视主题可调） */
+  padding: 3rem 1rem 2rem;
+  overflow: hidden;
+}
+.home-hero.has-bg .hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.55) saturate(1.1);
+  transform: scale(1.05);
+}
+.home-hero .hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  color: #fff;
+}
+.home-hero .site-title { font-size: 3rem; font-weight: 700; letter-spacing: 1px; }
+.home-hero .site-subtitle { font-size: 1.25rem; opacity: .9; margin-top: .75rem; }
+.home-hero .hero-actions { margin-top: 2rem; }
+.home-hero .btn.scroll-down { box-shadow: 0 4px 16px rgba(0,0,0,.35); }
+
+@media (max-width: 576px) {
+  .home-hero { min-height: 60vh; }
+  .home-hero .site-title { font-size: 2.25rem; }
+  .home-hero .site-subtitle { font-size: 1rem; }
+}
+
+/* 平滑滚动（现代浏览器） */
+html { scroll-behavior: smooth; }
+
+/* ---------------- Category Cards ---------------- */
+.category-section { padding-top: 3rem; }
+.section-title { font-size: 1.75rem; font-weight: 600; margin: 2rem 0 1.25rem; }
+.category-grid { margin-top: 1rem; }
+.cat-card { position: relative; display: block; text-decoration: none; border-radius: .75rem; background: linear-gradient(135deg,#f3f6fa,#e1e9f1); padding: 0; overflow: hidden; transition: all .35s; box-shadow: 0 4px 10px rgba(0,0,0,.06); height: 100%; border: 1px solid rgba(0,0,0,.06); }
+.cat-card:link,
+.cat-card:visited { color: #1d2733; }
+.cat-card:hover { text-decoration: none; transform: translateY(-4px); box-shadow: 0 10px 24px -4px rgba(0,0,0,.18); }
+.cat-card-body { padding: 1.25rem 1.1rem 1.15rem; }
+.cat-name { font-size: 1.25rem; margin: 0 0 .35rem; font-weight: 600; line-height: 1.2; color: #19202a; }
+.cat-meta { margin: 0; font-size: .72rem; letter-spacing: .6px; text-transform: uppercase; font-weight: 600; opacity: .85; color: #4a5b6d; }
+.cat-card:hover .cat-name { color: #0f62fe; }
+.cat-card:hover .cat-meta { color: #284b72; opacity: .95; }
+
+/* 暗色模式适配 */
+@media (prefers-color-scheme: dark) {
+  .cat-card { background: linear-gradient(145deg,#313b46,#232a32); box-shadow: 0 4px 12px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.06); }
+  .cat-card:link,
+  .cat-card:visited { color: #f1f4f8; }
+  .cat-name { color: #f5f8fa; }
+  .cat-meta { color: #b6c2ce; opacity: .85; }
+  .cat-card:hover { box-shadow: 0 10px 28px -4px rgba(0,0,0,.8); }
+  .cat-card:hover .cat-name { color: #ffffff; }
+  .cat-card:hover .cat-meta { color: #d4dde5; opacity: 1; }
+  .section-title { color: #eee; }
+}
+
+/* 与主题默认 teaser 的间距协调 */
+.section-title + .row { margin-top: .5rem; }
+
+/* ---------------- Header Background Image Override ---------------- */
+/* 将 header 背景改为图片：把图片放入 content/images/header-bg.jpg (会输出为 /images/header-bg.jpg) */
+/* 如果不想使用图片，注释掉下面这一段即可恢复上面定义的渐变背景 */
+.header {
+  position: relative; /* 使伪元素覆盖背景 */
+  background: url('/images/header-bg.jpg') center/cover no-repeat;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.25)); /* 叠加暗化提高文字可读性 */
+  pointer-events: none;
+}
+/* 提升文字层级与颜色（再次声明可保证覆盖） */
+.header .container, .header .title a, .header .title, .header ul a, .header p {
+  position: relative;
+  z-index: 2;
+  color: #f5f7fa !important;
+}
+/* 兼容暗色模式下保持一致（此处不再切换，仍使用同一图片） */
+@media (prefers-color-scheme: dark) {
+  .header::before { background: linear-gradient(0deg, rgba(0,0,0,.6), rgba(0,0,0,.35)); }
+}
